@@ -1,6 +1,7 @@
+
 import { useState, useEffect } from 'react';
 import { toast } from '@/components/ui/sonner';
-import { Check, X } from 'lucide-react';
+import { Check, X, Bell, BellOff } from 'lucide-react';
 
 export const useNotifications = () => {
   const [permission, setPermission] = useState<NotificationPermission>('default');
@@ -57,12 +58,35 @@ export const useNotifications = () => {
   ) => {
     console.log("Showing prompt notification:", title, message);
     
+    // Use Sonner toast with highest priority to ensure it shows
     toast.custom(
       (id) => (
-        <div className="fixed inset-0 flex items-center justify-center z-[100] bg-black/50">
-          <div className="bg-background rounded-lg shadow-lg max-w-md w-full mx-4 border border-border animate-in fade-in zoom-in-95 overflow-hidden">
+        <div 
+          className="fixed inset-0 flex items-center justify-center z-[100] bg-black/50" 
+          onClick={(e) => {
+            // Prevent clicks on the overlay from dismissing the toast
+            e.stopPropagation();
+          }}
+        >
+          <div 
+            className="bg-background rounded-lg shadow-lg max-w-md w-full mx-4 border border-border animate-in fade-in zoom-in-95 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="bg-primary p-4">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-semibold text-primary-foreground flex items-center gap-2">
+                  <Bell className="w-5 h-5" />
+                  {title}
+                </h3>
+                {permission !== 'granted' && (
+                  <div className="flex items-center gap-1 text-xs bg-background/10 text-primary-foreground px-2 py-1 rounded-full">
+                    <BellOff className="w-3 h-3" />
+                    <span>Notifications blocked</span>
+                  </div>
+                )}
+              </div>
+            </div>
             <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2 text-foreground">{title}</h3>
               <p className="text-muted-foreground text-base mb-6">{message}</p>
               
               <div className="flex gap-4">
@@ -96,7 +120,10 @@ export const useNotifications = () => {
       {
         duration: Infinity,
         important: true,
-        className: "p-0 bg-transparent border-none shadow-none"
+        onAutoClose: false,
+        className: "p-0 bg-transparent border-none shadow-none max-w-none w-full",
+        position: "center",
+        style: { width: "100%", maxWidth: "100%" }
       }
     );
   };
