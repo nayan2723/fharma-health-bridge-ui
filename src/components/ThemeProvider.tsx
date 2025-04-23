@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 type Theme = "dark" | "light" | "system";
 
@@ -28,10 +28,18 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => {
+      if (typeof window !== "undefined") {
+        return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
+      }
+      return defaultTheme;
+    }
   );
 
-  useEffect(() => {
+  // Only run this effect on client-side
+  useState(() => {
+    if (typeof window === "undefined") return;
+    
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
@@ -47,12 +55,14 @@ export function ThemeProvider({
     }
 
     root.classList.add(theme);
-  }, [theme]);
+  });
 
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      if (typeof window !== "undefined") {
+        localStorage.setItem(storageKey, theme);
+      }
       setTheme(theme);
     },
   };
