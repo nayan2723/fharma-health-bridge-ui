@@ -1,7 +1,6 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, Plus } from "lucide-react";
+import { Calendar as CalendarIcon, Plus, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -30,6 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
+import { useNotifications } from "@/hooks/useNotifications";
 
 interface Medication {
   id: string;
@@ -54,6 +54,7 @@ const formSchema = z.object({
 const MedicineScheduler = () => {
   const [medications, setMedications] = useState<Medication[]>([]);
   const { toast } = useToast();
+  const { permission, requestPermission, sendNotification } = useNotifications();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,7 +65,46 @@ const MedicineScheduler = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  useEffect(() => {
+    const checkMedications = () => {
+      const now = new Date();
+      medications.forEach((med) => {
+        const [hours, minutes] = med.timeOfDay.split(':');
+        const medicationTime = new Date();
+        medicationTime.setHours(parseInt(hours, 10));
+        medicationTime.setMinutes(parseInt(minutes, 10));
+        medicationTime.setSeconds(0);
+
+        const timeDiff = Math.abs(now.getTime() - medicationTime.getTime());
+        if (timeDiff <= 60000) {
+          sendNotification(`Time to take ${med.name}`, {
+            body: `Dosage: ${med.dosage}`,
+            icon: '/favicon.ico'
+          });
+          
+          toast({
+            title: "Medicine Reminder",
+            description: `It's time to take ${med.name} (${med.dosage})`,
+          });
+        }
+      });
+    };
+
+    const interval = setInterval(checkMedications, 60000);
+    return () => clearInterval(interval);
+  }, [medications, sendNotification, toast]);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (permission !== 'granted') {
+      const permissionGranted = await requestPermission();
+      if (!permissionGranted) {
+        toast({
+          title: "Notification Permission Required",
+          description: "Please enable notifications to receive medicine reminders.",
+        });
+      }
+    }
+
     const newMedication: Medication = {
       id: Math.random().toString(36).substring(7),
       name: values.name,
@@ -99,6 +139,9 @@ const MedicineScheduler = () => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Add New Medication</DialogTitle>
+            <p className="text-sm text-muted-foreground">
+              You will receive notifications when it's time to take your medicine.
+            </p>
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
