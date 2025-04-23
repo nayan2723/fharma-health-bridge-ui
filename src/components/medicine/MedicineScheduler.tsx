@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, Plus, Bell, CheckCircle, XCircle } from "lucide-react";
@@ -8,6 +9,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
@@ -77,22 +79,39 @@ const MedicineScheduler = () => {
   };
 
   useEffect(() => {
+    // Debug to verify medications state
+    console.log('Current medications:', medications);
+
     const checkMedications = () => {
       const now = new Date();
+      console.log('Checking medications at:', now.toLocaleTimeString());
+      
       medications.forEach((med) => {
         const [hours, minutes] = med.timeOfDay.split(':');
         const medicationTime = new Date();
         medicationTime.setHours(parseInt(hours, 10));
         medicationTime.setMinutes(parseInt(minutes, 10));
         medicationTime.setSeconds(0);
-
+        
+        // For debugging
+        console.log(`Medication ${med.name} time: ${medicationTime.toLocaleTimeString()}`);
+        
         const timeDiff = Math.abs(now.getTime() - medicationTime.getTime());
-        if (timeDiff <= 60000 && (!med.lastUpdated || med.lastUpdated.getDate() !== now.getDate())) {
+        const timeDiffMinutes = timeDiff / 60000;
+        
+        console.log(`Time difference for ${med.name}: ${timeDiffMinutes.toFixed(2)} minutes`);
+        
+        // Check if it's within 2 minutes of medication time and not already notified today
+        if (timeDiffMinutes <= 2 && (!med.lastUpdated || med.lastUpdated.getDate() !== now.getDate())) {
+          console.log(`Showing notification for ${med.name}`);
+          
+          // Send browser notification
           sendNotification(`Time to take ${med.name}`, {
             body: `Dosage: ${med.dosage}`,
             icon: '/favicon.ico'
           });
           
+          // Show prompt notification (modal)
           showPromptNotification(
             "Medicine Reminder",
             `It's time to take ${med.name} (${med.dosage})`,
@@ -103,9 +122,28 @@ const MedicineScheduler = () => {
       });
     };
 
-    const interval = setInterval(checkMedications, 60000);
+    // Check immediately when component mounts or medications change
+    checkMedications();
+    
+    // Then set interval to check every 30 seconds
+    const interval = setInterval(checkMedications, 30000);
     return () => clearInterval(interval);
   }, [medications, sendNotification, showPromptNotification]);
+
+  // For testing - add a function to simulate a notification
+  const testNotification = () => {
+    if (medications.length > 0) {
+      const testMed = medications[0];
+      showPromptNotification(
+        "Test Medicine Reminder",
+        `It's time to take ${testMed.name} (${testMed.dosage})`,
+        () => updateMedicationStatus(testMed.id, 'taken'),
+        () => updateMedicationStatus(testMed.id, 'not_taken')
+      );
+    } else {
+      toast.info("Please add a medication first to test notifications");
+    }
+  };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (permission !== 'granted') {
@@ -154,9 +192,9 @@ const MedicineScheduler = () => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Add New Medication</DialogTitle>
-            <p className="text-sm text-muted-foreground">
+            <DialogDescription>
               You will receive notifications when it's time to take your medicine.
-            </p>
+            </DialogDescription>
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -255,6 +293,12 @@ const MedicineScheduler = () => {
           </Form>
         </DialogContent>
       </Dialog>
+
+      {/* Test button */}
+      <Button onClick={testNotification} variant="outline" className="w-full mt-3 bg-primary/5 border-primary/20">
+        <Bell size={16} className="mr-2" />
+        Test Notification
+      </Button>
 
       <div className="space-y-4 mt-6">
         {medications.map((med) => (
