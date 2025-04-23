@@ -120,9 +120,12 @@ export const useNotifications = () => {
       {
         duration: Infinity,
         important: true,
-        onAutoClose: false,
+        // Fix for error TS2322: Type 'boolean' is not assignable to type '(toast: ToastT) => void'
+        // Remove the incorrect onAutoClose: false property
         className: "p-0 bg-transparent border-none shadow-none max-w-none w-full",
-        position: "center",
+        // Fix for error TS2322: Type '"center"' is not assignable to type 'Position'
+        // Using "top-center" which is a valid position value in sonner
+        position: "top-center", 
         style: { width: "100%", maxWidth: "100%" }
       }
     );
