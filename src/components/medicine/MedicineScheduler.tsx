@@ -47,7 +47,7 @@ const formSchema = z.object({
   startDate: z.date({
     required_error: "Start date is required",
   }),
-  duration: z.string().transform(val => parseInt(val, 10)),
+  duration: z.coerce.number().min(1, "Duration must be at least 1 day"),
   timeOfDay: z.string().min(1, "Time of day is required"),
 });
 
@@ -60,14 +60,18 @@ const MedicineScheduler = () => {
       name: "",
       dosage: "",
       timeOfDay: "",
-      duration: "7",
+      duration: 7,
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const newMedication: Medication = {
       id: Math.random().toString(36).substring(7),
-      ...values,
+      name: values.name,
+      dosage: values.dosage,
+      startDate: values.startDate,
+      duration: values.duration,
+      timeOfDay: values.timeOfDay,
       daysCompleted: 0,
     };
     

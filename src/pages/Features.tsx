@@ -11,6 +11,7 @@ import {
   Smartphone 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import MedicineScheduler from "@/components/medicine/MedicineScheduler";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
