@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { toast } from '@/components/ui/sonner';
+import { Check, X } from 'lucide-react';
 
 export const useNotifications = () => {
   const [permission, setPermission] = useState<NotificationPermission>('default');
@@ -32,7 +32,6 @@ export const useNotifications = () => {
   };
 
   const sendNotification = (title: string, options?: NotificationOptions) => {
-    // Send the browser notification if permission is granted
     console.log("Attempting to send notification:", title);
     
     if (permission === 'granted') {
@@ -47,11 +46,9 @@ export const useNotifications = () => {
       console.log("Notification permission not granted, current status:", permission);
     }
     
-    // Return true if browser notification was sent
     return permission === 'granted';
   };
 
-  // Method to show a prominent toast notification
   const showPromptNotification = (
     title: string,
     message: string,
@@ -63,31 +60,35 @@ export const useNotifications = () => {
     toast.custom(
       (id) => (
         <div className="fixed inset-0 flex items-center justify-center z-[100] bg-black/50">
-          <div className="bg-background rounded-lg p-6 shadow-lg max-w-md w-full mx-4 border border-border animate-in fade-in zoom-in-95">
-            <h3 className="text-lg font-semibold mb-1">{title}</h3>
-            <p className="text-muted-foreground mb-6">{message}</p>
-            
-            <div className="flex gap-3">
-              <button 
-                onClick={() => {
-                  console.log("Medication marked as taken");
-                  onTaken();
-                  toast.dismiss(id);
-                }}
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground py-2 px-4 rounded-lg font-medium flex items-center justify-center"
-              >
-                I took it
-              </button>
-              <button 
-                onClick={() => {
-                  console.log("Medication marked as missed");
-                  onMissed();
-                  toast.dismiss(id);
-                }}
-                className="flex-1 bg-destructive/10 hover:bg-destructive/20 text-destructive py-2 px-4 rounded-lg font-medium flex items-center justify-center"
-              >
-                Nah, I missed it
-              </button>
+          <div className="bg-background rounded-lg shadow-lg max-w-md w-full mx-4 border border-border animate-in fade-in zoom-in-95 overflow-hidden">
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2 text-foreground">{title}</h3>
+              <p className="text-muted-foreground text-base mb-6">{message}</p>
+              
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => {
+                    console.log("Medication marked as taken");
+                    onTaken();
+                    toast.dismiss(id);
+                  }}
+                  className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                >
+                  <Check className="w-4 h-4" />
+                  I took it
+                </button>
+                <button 
+                  onClick={() => {
+                    console.log("Medication marked as missed");
+                    onMissed();
+                    toast.dismiss(id);
+                  }}
+                  className="flex-1 bg-destructive/10 hover:bg-destructive/20 text-destructive py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                >
+                  <X className="w-4 h-4" />
+                  I missed it
+                </button>
+              </div>
             </div>
           </div>
         </div>
