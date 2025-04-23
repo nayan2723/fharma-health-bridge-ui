@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, Plus, Bell } from "lucide-react";
+import { Calendar as CalendarIcon, Plus, Bell, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -39,6 +39,8 @@ interface Medication {
   duration: number;
   timeOfDay: string;
   daysCompleted: number;
+  status?: 'taken' | 'not_taken';
+  lastUpdated?: Date;
 }
 
 const formSchema = z.object({
@@ -65,6 +67,14 @@ const MedicineScheduler = () => {
     },
   });
 
+  const updateMedicationStatus = (id: string, status: 'taken' | 'not_taken') => {
+    setMedications(prev =>
+      prev.map(med =>
+        med.id === id ? { ...med, status, lastUpdated: new Date() } : med
+      )
+    );
+  };
+
   useEffect(() => {
     const checkMedications = () => {
       const now = new Date();
@@ -76,7 +86,7 @@ const MedicineScheduler = () => {
         medicationTime.setSeconds(0);
 
         const timeDiff = Math.abs(now.getTime() - medicationTime.getTime());
-        if (timeDiff <= 60000) {
+        if (timeDiff <= 60000 && (!med.lastUpdated || med.lastUpdated.getDate() !== now.getDate())) {
           sendNotification(`Time to take ${med.name}`, {
             body: `Dosage: ${med.dosage}`,
             icon: '/favicon.ico'
@@ -85,6 +95,28 @@ const MedicineScheduler = () => {
           toast({
             title: "Medicine Reminder",
             description: `It's time to take ${med.name} (${med.dosage})`,
+            action: (
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => updateMedicationStatus(med.id, 'taken')}
+                  className="bg-primary/10 hover:bg-primary/20 border-0"
+                >
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  Taken
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => updateMedicationStatus(med.id, 'not_taken')}
+                  className="bg-destructive/10 hover:bg-destructive/20 border-0"
+                >
+                  <XCircle className="w-4 h-4 text-destructive" />
+                  Not Taken
+                </Button>
+              </div>
+            ),
           });
         }
       });
@@ -113,6 +145,8 @@ const MedicineScheduler = () => {
       duration: values.duration,
       timeOfDay: values.timeOfDay,
       daysCompleted: 0,
+      status: 'not_taken',
+      lastUpdated: new Date(),
     };
     
     setMedications(prev => [...prev, newMedication]);
@@ -249,8 +283,30 @@ const MedicineScheduler = () => {
                 <h4 className="font-medium">{med.name}</h4>
                 <p className="text-sm text-muted-foreground">{med.dosage}</p>
               </div>
-              <div className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
-                {med.timeOfDay}
+              <div className="flex items-center gap-2">
+                {med.status && (
+                  <div className={cn(
+                    "text-xs px-2 py-1 rounded-full flex items-center gap-1",
+                    med.status === 'taken' 
+                      ? "bg-primary/10 text-primary" 
+                      : "bg-destructive/10 text-destructive"
+                  )}>
+                    {med.status === 'taken' ? (
+                      <>
+                        <CheckCircle className="w-3 h-3" />
+                        Taken
+                      </>
+                    ) : (
+                      <>
+                        <XCircle className="w-3 h-3" />
+                        Not Taken
+                      </>
+                    )}
+                  </div>
+                )}
+                <div className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
+                  {med.timeOfDay}
+                </div>
               </div>
             </div>
             <div className="mt-3 flex items-center gap-2">
