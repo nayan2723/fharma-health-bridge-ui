@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { 
@@ -119,7 +118,7 @@ const Features = () => {
         </div>
       </section>
 
-      {/* Doctor Chat */}
+      {/* Doc Chat */}
       <section id="doc-chat" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row-reverse gap-12 items-center">
@@ -250,66 +249,7 @@ const Features = () => {
                   </h3>
                 </div>
                 <div className="p-6">
-                  <div className="space-y-4">
-                    <div className="bg-muted/50 rounded-xl p-4 border border-border">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h4 className="font-medium">Paracetamol</h4>
-                          <p className="text-sm text-muted-foreground">500mg tablet</p>
-                        </div>
-                        <div className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
-                          8:00 AM
-                        </div>
-                      </div>
-                      <div className="mt-3 flex items-center gap-2">
-                        <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                          <div className="bg-primary h-full" style={{ width: '60%' }}></div>
-                        </div>
-                        <span className="text-xs text-muted-foreground">3/5 days</span>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-muted/50 rounded-xl p-4 border border-border">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h4 className="font-medium">Amoxicillin</h4>
-                          <p className="text-sm text-muted-foreground">250mg capsule</p>
-                        </div>
-                        <div className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
-                          2:00 PM
-                        </div>
-                      </div>
-                      <div className="mt-3 flex items-center gap-2">
-                        <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                          <div className="bg-primary h-full" style={{ width: '30%' }}></div>
-                        </div>
-                        <span className="text-xs text-muted-foreground">3/10 days</span>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-muted/50 rounded-xl p-4 border border-border">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h4 className="font-medium">Vitamin D</h4>
-                          <p className="text-sm text-muted-foreground">1000 IU</p>
-                        </div>
-                        <div className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
-                          9:00 PM
-                        </div>
-                      </div>
-                      <div className="mt-3 flex items-center gap-2">
-                        <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                          <div className="bg-primary h-full" style={{ width: '80%' }}></div>
-                        </div>
-                        <span className="text-xs text-muted-foreground">24/30 days</span>
-                      </div>
-                    </div>
-                    
-                    <Button variant="outline" className="w-full">
-                      <Calendar size={16} className="mr-2" />
-                      Add New Medication
-                    </Button>
-                  </div>
+                  <MedicineScheduler />
                 </div>
               </div>
             </motion.div>
