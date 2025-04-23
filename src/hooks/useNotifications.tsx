@@ -120,13 +120,18 @@ export const useNotifications = () => {
       {
         duration: Infinity,
         important: true,
-        // Fix for error TS2322: Type 'boolean' is not assignable to type '(toast: ToastT) => void'
-        // Remove the incorrect onAutoClose: false property
         className: "p-0 bg-transparent border-none shadow-none max-w-none w-full",
-        // Fix for error TS2322: Type '"center"' is not assignable to type 'Position'
-        // Using "top-center" which is a valid position value in sonner
-        position: "top-center", 
-        style: { width: "100%", maxWidth: "100%" }
+        position: "fixed", // Change to fixed to ensure full-screen positioning
+        style: { 
+          width: "100%", 
+          maxWidth: "100%",
+          top: "0",
+          left: "0",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%"
+        }
       }
     );
   };
