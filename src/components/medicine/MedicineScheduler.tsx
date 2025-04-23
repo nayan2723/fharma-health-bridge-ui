@@ -30,6 +30,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
 import { useNotifications } from "@/hooks/useNotifications";
+import { toast } from "@/components/ui/sonner";
 
 interface Medication {
   id: string;
@@ -55,8 +56,8 @@ const formSchema = z.object({
 
 const MedicineScheduler = () => {
   const [medications, setMedications] = useState<Medication[]>([]);
-  const { toast } = useToast();
-  const { permission, requestPermission, sendNotification } = useNotifications();
+  const { toast: shadcnToast } = useToast();
+  const { permission, requestPermission, sendNotification, showPromptNotification } = useNotifications();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -92,45 +93,25 @@ const MedicineScheduler = () => {
             icon: '/favicon.ico'
           });
           
-          toast({
-            title: "Medicine Reminder",
-            description: `It's time to take ${med.name} (${med.dosage})`,
-            action: (
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateMedicationStatus(med.id, 'taken')}
-                  className="bg-primary/10 hover:bg-primary/20 border-0"
-                >
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  Taken
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateMedicationStatus(med.id, 'not_taken')}
-                  className="bg-destructive/10 hover:bg-destructive/20 border-0"
-                >
-                  <XCircle className="w-4 h-4 text-destructive" />
-                  Not Taken
-                </Button>
-              </div>
-            ),
-          });
+          showPromptNotification(
+            "Medicine Reminder",
+            `It's time to take ${med.name} (${med.dosage})`,
+            () => updateMedicationStatus(med.id, 'taken'),
+            () => updateMedicationStatus(med.id, 'not_taken')
+          );
         }
       });
     };
 
     const interval = setInterval(checkMedications, 60000);
     return () => clearInterval(interval);
-  }, [medications, sendNotification, toast]);
+  }, [medications, sendNotification, showPromptNotification]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (permission !== 'granted') {
       const permissionGranted = await requestPermission();
       if (!permissionGranted) {
-        toast({
+        shadcnToast({
           title: "Notification Permission Required",
           description: "Please enable notifications to receive medicine reminders.",
         });
@@ -150,7 +131,7 @@ const MedicineScheduler = () => {
     };
     
     setMedications(prev => [...prev, newMedication]);
-    toast({
+    shadcnToast({
       title: "Medicine scheduled",
       description: `${values.name} has been added to your schedule.`,
     });
