@@ -121,7 +121,7 @@ export const useNotifications = () => {
         duration: Infinity,
         important: true,
         className: "p-0 bg-transparent border-none shadow-none max-w-none w-full",
-        position: "fixed", // Change to fixed to ensure full-screen positioning
+        position: "bottom-right", // Change to fixed to ensure full-screen positioning
         style: { 
           width: "100%", 
           maxWidth: "100%",
