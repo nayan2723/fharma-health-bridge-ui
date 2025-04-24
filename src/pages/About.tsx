@@ -150,12 +150,12 @@ const About = () => {
             <TeamMember 
               name="Nayan Kshitij"
               role="Frontend & API Integration"
-              image="https://i.ibb.co/8nQxwdrd/utk.jpg"
+              image="https://i.ibb.co/DDPZgdmM/1745451423981.jpg"
             />
             <TeamMember 
               name="Aditya Kumar"
               role="Backend & Deployment"
-              image="https://i.ibb.co/8nQxwdrd/utk.jpg"
+              image="https://i.ibb.co/Rpfdqcch/adiya.jpg"
             />
             <TeamMember 
               name="Utkarsh Singh"
