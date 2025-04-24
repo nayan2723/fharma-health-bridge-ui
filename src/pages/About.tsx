@@ -150,17 +150,17 @@ const About = () => {
             <TeamMember 
               name="Nayan Kshitij"
               role="Frontend & API Integration"
-              image="1745451423981.jpg"
+              image="https://i.ibb.co/8nQxwdrd/utk.jpg"
             />
             <TeamMember 
               name="Aditya Kumar"
               role="Backend & Deployment"
-              image="adiya.jpg"
+              image="https://i.ibb.co/8nQxwdrd/utk.jpg"
             />
             <TeamMember 
               name="Utkarsh Singh"
               role="AI & Research Lead"
-              image="utk.jpg"
+              image="https://i.ibb.co/8nQxwdrd/utk.jpg"
             />
           </motion.div>
         </div>
