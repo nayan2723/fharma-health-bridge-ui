@@ -32,7 +32,13 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient hover:scale-105 transition-transform duration-300">About Fharma</h1>
+            <motion.h1 
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="text-4xl md:text-6xl font-bold mb-6 text-gradient"
+            >
+              About Fharma
+            </motion.h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto hover:text-primary transition-colors duration-300">
               Bridging the gap between rural healthcare needs and urban medical expertise through technology.
             </p>
@@ -41,7 +47,13 @@ const About = () => {
       </section>
 
       {/* Our Mission */}
-      <section className="section-padding">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="section-padding"
+      >
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <motion.div
@@ -79,10 +91,16 @@ const About = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Our Goal */}
-      <section className="hero-gradient section-padding">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="hero-gradient section-padding"
+      >
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row-reverse gap-12 items-center">
             <motion.div
@@ -120,10 +138,16 @@ const About = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Team Section */}
-      <section className="section-padding">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="section-padding"
+      >
         <div className="container mx-auto">
           <motion.div
             variants={fadeInUp}
@@ -163,10 +187,16 @@ const About = () => {
             />
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Acknowledgments */}
-      <section className="hero-gradient section-padding">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="hero-gradient section-padding"
+      >
         <div className="container mx-auto">
           <motion.div
             variants={fadeInUp}
@@ -175,7 +205,13 @@ const About = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold mb-6 text-gradient hover:scale-105 transition-transform duration-300">Special Thanks</h2>
+            <motion.h2 
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="text-3xl font-bold mb-6 text-gradient hover:scale-105 transition-transform duration-300"
+            >
+              Special Thanks
+            </motion.h2>
             <p className="text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed hover:text-primary transition-colors duration-300">
               We extend our heartfelt gratitude to our mentors, the Dean, and the School of Computer Science Engineering and Technology (SCSET) at Bennett University for their unwavering support and guidance in bringing the Fharma project to life.
             </p>
@@ -187,7 +223,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };
@@ -202,6 +238,11 @@ const TeamMember = ({ name, role, image }: TeamMemberProps) => {
   return (
     <motion.div
       variants={fadeInUp}
+      whileHover={{ 
+        scale: 1.05,
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      }}
+      transition={{ type: "spring", stiffness: 300 }}
       className="glass-card rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
     >
       <div className="aspect-[4/3] overflow-hidden">
