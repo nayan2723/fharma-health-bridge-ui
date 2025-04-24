@@ -32,8 +32,8 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">About Fharma</h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient hover:scale-105 transition-transform duration-300">About Fharma</h1>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto hover:text-primary transition-colors duration-300">
               Bridging the gap between rural healthcare needs and urban medical expertise through technology.
             </p>
           </motion.div>
@@ -69,11 +69,11 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <div className="glass-card rounded-3xl overflow-hidden shadow-lg hover-scale">
+              <div className="glass-card rounded-3xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
                 <img 
                   src="https://i.ibb.co/ycSm7tnV/injection-at-community-clinic.jpg" 
                   alt="Rural Healthcare" 
-                  className="w-full h-auto"
+                  className="w-full h-auto transform transition-transform duration-500 hover:scale-110"
                 />
               </div>
             </motion.div>
@@ -110,11 +110,11 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <div className="glass-card rounded-3xl overflow-hidden shadow-lg hover-scale">
+              <div className="glass-card rounded-3xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
                 <img 
                   src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" 
                   alt="Healthcare Technology" 
-                  className="w-full h-auto"
+                  className="w-full h-auto transform transition-transform duration-500 hover:scale-110"
                 />
               </div>
             </motion.div>
@@ -175,15 +175,15 @@ const About = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold mb-6 text-gradient">Special Thanks</h2>
-            <p className="text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            <h2 className="text-3xl font-bold mb-6 text-gradient hover:scale-105 transition-transform duration-300">Special Thanks</h2>
+            <p className="text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed hover:text-primary transition-colors duration-300">
               We extend our heartfelt gratitude to our mentors, the Dean, and the School of Computer Science Engineering and Technology (SCSET) at Bennett University for their unwavering support and guidance in bringing the Fharma project to life.
             </p>
-            <div className="glass-card rounded-3xl p-8 max-w-3xl mx-auto hover-scale">
-              <p className="italic text-muted-foreground">
+            <div className="glass-card rounded-3xl p-8 max-w-3xl mx-auto transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+              <p className="italic text-muted-foreground hover:text-primary transition-colors duration-300">
                 "This project is a testament to the power of technology in improving healthcare accessibility. We're proud to support innovations that can make a real difference in people's lives."
               </p>
-              <p className="mt-4 font-medium">— Dean, SCSET, Bennett University</p>
+              <p className="mt-4 font-medium hover:text-primary transition-colors duration-300">— Dean, SCSET, Bennett University</p>
             </div>
           </motion.div>
         </div>
@@ -202,14 +202,18 @@ const TeamMember = ({ name, role, image }: TeamMemberProps) => {
   return (
     <motion.div
       variants={fadeInUp}
-      className="glass-card rounded-2xl overflow-hidden card-hover"
+      className="glass-card rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
     >
       <div className="aspect-[4/3] overflow-hidden">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <img 
+          src={image} 
+          alt={name} 
+          className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110" 
+        />
       </div>
       <div className="p-6">
-        <h3 className="text-xl font-semibold">{name}</h3>
-        <p className="text-muted-foreground">{role}</p>
+        <h3 className="text-xl font-semibold hover:text-primary transition-colors duration-300">{name}</h3>
+        <p className="text-muted-foreground hover:text-primary transition-colors duration-300">{role}</p>
       </div>
     </motion.div>
   );
