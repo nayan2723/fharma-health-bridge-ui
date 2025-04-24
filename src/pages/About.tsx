@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
 
@@ -25,7 +24,7 @@ const About = () => {
   return (
     <div className="flex flex-col gap-16">
       {/* Hero Section */}
-      <section className="bg-muted/30 py-20">
+      <section className="hero-gradient py-24">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -33,7 +32,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Fharma</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">About Fharma</h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Bridging the gap between rural healthcare needs and urban medical expertise through technology.
             </p>
@@ -42,8 +41,8 @@ const About = () => {
       </section>
 
       {/* Our Mission */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
+      <section className="section-padding">
+        <div className="container mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <motion.div
               variants={fadeInUp}
@@ -52,14 +51,14 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-              <p className="text-muted-foreground mb-4">
+              <h2 className="text-3xl font-bold mb-6 text-gradient">Our Mission</h2>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 At Fharma, we're on a mission to revolutionize healthcare accessibility in rural India. We believe that everyone deserves access to quality healthcare, regardless of their geographical location.
               </p>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 By leveraging artificial intelligence and telemedicine, we're creating a bridge between rural communities and urban medical expertise, making healthcare more accessible, affordable, and efficient for all.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground leading-relaxed">
                 Our platform offers AI-powered medicine recommendations, virtual doctor consultations, medication scheduling, and rare disease information – all designed to empower rural communities with the healthcare tools they need.
               </p>
             </motion.div>
@@ -70,7 +69,7 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <div className="rounded-3xl overflow-hidden shadow-lg">
+              <div className="glass-card rounded-3xl overflow-hidden shadow-lg hover-scale">
                 <img 
                   src="https://i.ibb.co/ycSm7tnV/injection-at-community-clinic.jpg" 
                   alt="Rural Healthcare" 
@@ -83,8 +82,8 @@ const About = () => {
       </section>
 
       {/* Our Goal */}
-      <section className="py-12 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="hero-gradient section-padding">
+        <div className="container mx-auto">
           <div className="flex flex-col md:flex-row-reverse gap-12 items-center">
             <motion.div
               variants={fadeInUp}
@@ -93,14 +92,14 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <h2 className="text-3xl font-bold mb-6">Reducing the Healthcare Gap</h2>
-              <p className="text-muted-foreground mb-4">
+              <h2 className="text-3xl font-bold mb-6 text-gradient">Reducing the Healthcare Gap</h2>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 India faces a significant disparity in healthcare accessibility between urban and rural areas. While urban centers have advanced medical facilities, rural regions often lack basic healthcare infrastructure.
               </p>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 Fharma aims to bridge this gap by using AI and digital technologies to bring medical expertise to remote areas. Our platform helps rural residents access medical advice, medicine recommendations, and health information without needing to travel long distances.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground leading-relaxed">
                 By combining artificial intelligence with healthcare knowledge, we're creating an ecosystem that makes quality healthcare accessible to everyone, regardless of their location or economic status.
               </p>
             </motion.div>
@@ -111,7 +110,7 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <div className="rounded-3xl overflow-hidden shadow-lg">
+              <div className="glass-card rounded-3xl overflow-hidden shadow-lg hover-scale">
                 <img 
                   src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" 
                   alt="Healthcare Technology" 
@@ -124,8 +123,8 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
+      <section className="section-padding">
+        <div className="container mx-auto">
           <motion.div
             variants={fadeInUp}
             initial="hidden"
@@ -134,7 +133,7 @@ const About = () => {
             className="text-center mb-16"
           >
             <Users size={40} className="mx-auto mb-4 text-primary" />
-            <h2 className="text-3xl font-bold mb-4">Our Team</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Our Team</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Meet the passionate individuals behind Fharma who are dedicated to revolutionizing healthcare accessibility.
             </p>
@@ -167,8 +166,8 @@ const About = () => {
       </section>
 
       {/* Acknowledgments */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="hero-gradient section-padding">
+        <div className="container mx-auto">
           <motion.div
             variants={fadeInUp}
             initial="hidden"
@@ -176,11 +175,11 @@ const About = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold mb-6">Special Thanks</h2>
-            <p className="text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold mb-6 text-gradient">Special Thanks</h2>
+            <p className="text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
               We extend our heartfelt gratitude to our mentors, the Dean, and the School of Computer Science Engineering and Technology (SCSET) at Bennett University for their unwavering support and guidance in bringing the Fharma project to life.
             </p>
-            <div className="bg-card rounded-3xl p-8 max-w-3xl mx-auto shadow-md">
+            <div className="glass-card rounded-3xl p-8 max-w-3xl mx-auto hover-scale">
               <p className="italic text-muted-foreground">
                 "This project is a testament to the power of technology in improving healthcare accessibility. We're proud to support innovations that can make a real difference in people's lives."
               </p>
@@ -217,5 +216,3 @@ const TeamMember = ({ name, role, image }: TeamMemberProps) => {
 };
 
 export default About;
-
-
