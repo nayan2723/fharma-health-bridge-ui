@@ -44,20 +44,20 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/doc-chat" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/features" className="text-muted-foreground hover:text-primary transition-colors">
                   Doc Chat
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
+                  Contact Us
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin size={18} className="mr-2 mt-0.5 text-muted-foreground" />

@@ -72,7 +72,7 @@ const About = () => {
             >
               <div className="rounded-3xl overflow-hidden shadow-lg">
                 <img 
-                  src="https://images.unsplash.com/photo-1576671414121-aa2d0c0d40a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" 
+                  src="injection-at-community-clinic.jpg" 
                   alt="Rural Healthcare" 
                   className="w-full h-auto"
                 />
@@ -148,19 +148,19 @@ const About = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             <TeamMember 
-              name="Dr. Anika Singh"
-              role="Founder & Medical Director"
-              image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              name="Nayan Kshitij"
+              role="Frontend & API Integration"
+              image="1745451423981.jpg"
             />
             <TeamMember 
-              name="Raj Patel"
-              role="AI Research Lead"
-              image="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              name="Aditya Kumar"
+              role="Backend & Deployment"
+              image="adiya.jpg"
             />
             <TeamMember 
-              name="Priya Sharma"
-              role="Rural Outreach Coordinator"
-              image="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              name="Utkarsh Singh"
+              role="AI & Research Lead"
+              image="utk.jpg"
             />
           </motion.div>
         </div>

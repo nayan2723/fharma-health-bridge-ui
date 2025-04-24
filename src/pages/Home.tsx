@@ -49,7 +49,7 @@ const Home = () => {
                   <Link to="/features">Explore Features <ArrowRight className="ml-2" size={18} /></Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-full">
-                  <Link to="/doc-chat">Try Doc Chat</Link>
+                  <Link to="/doc-chat">Try Medicine Recommender</Link>
                 </Button>
               </div>
             </motion.div>
@@ -108,7 +108,7 @@ const Home = () => {
               icon={<MessageCircle size={32} />}
               title="Doc Chat"
               description="Connect with AI doctors for quick consultations and health advice."
-              link="/doc-chat"
+              link="/features#doc-chat"
             />
             
             <FeatureCard 

@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MedicineScheduler from "@/components/medicine/MedicineScheduler";
+import RareDiseasesSection from "@/components/RareDiseaseSection";
+
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -76,7 +78,9 @@ const Features = () => {
                 <FeaturePoint icon={<Pill size={18} />} text="Personalized medicine recommendations" />
                 <FeaturePoint icon={<FileSearch size={18} />} text="Consideration of medical history and allergies" />
               </ul>
-              <Button size="lg" className="rounded-full">Try the Recommender</Button>
+              <Button size="lg" className="rounded-full">
+              <Link to="/doc-chat">Try the Recommender</Link>
+              </Button>
             </motion.div>
             <motion.div
               variants={fadeInUp}
@@ -143,8 +147,8 @@ const Features = () => {
                 <FeaturePoint icon={<Video size={18} />} text="Text-based consultations with medical AI" />
                 <FeaturePoint icon={<Smartphone size={18} />} text="Accessible via any device with internet" />
               </ul>
-              <Button asChild size="lg" className="rounded-full">
-                <Link to="/doc-chat">Start a Consultation</Link>
+              <Button size="lg" className="rounded-full">
+                <Link to="">Under Maintainance</Link>
               </Button>
             </motion.div>
             <motion.div
@@ -210,6 +214,7 @@ const Features = () => {
       </section>
 
       {/* Medicine Scheduler */}
+      
       <section id="medicine-scheduler" className="py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-12 items-center">
@@ -259,7 +264,8 @@ const Features = () => {
       </section>
 
       {/* Rare Disease Info */}
-      <section id="rare-diseases" className="py-20 bg-muted/30">
+      <RareDiseasesSection />
+      {/* <section id="rare-diseases" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row-reverse gap-12 items-center">
             <motion.div
@@ -335,7 +341,7 @@ const Features = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

@@ -29,7 +29,7 @@ const Navbar = () => {
     { path: "/", label: "Home" },
     { path: "/about", label: "About Us" },
     { path: "/features", label: "Features" },
-    { path: "/contact", label: "Contact" },
+    { path: "/contact", label: "Contact Us" },
   ];
 
   const toggleTheme = () => {
