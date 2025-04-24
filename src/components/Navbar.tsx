@@ -30,6 +30,7 @@ const Navbar = () => {
     { path: "/about", label: "About Us" },
     { path: "/features", label: "Features" },
     { path: "/contact", label: "Contact Us" },
+    { path: "/auth", label: "Sign In" },
   ];
 
   const toggleTheme = () => {

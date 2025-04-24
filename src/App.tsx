@@ -11,6 +11,7 @@ import Features from "./pages/Features";
 import DocChat from "./pages/DocChat";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/features" element={<Layout><Features /></Layout>} />
             <Route path="/doc-chat" element={<Layout><DocChat /></Layout>} />
             <Route path="/contact" element={<Layout><Contact /></Layout>} />
+            <Route path="/auth" element={<Layout><Auth /></Layout>} />
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
         </BrowserRouter>
