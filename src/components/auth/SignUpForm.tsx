@@ -5,6 +5,8 @@ import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 interface SignUpFormValues {
   name: string;
@@ -15,9 +17,20 @@ interface SignUpFormValues {
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<SignUpFormValues>();
+  const navigate = useNavigate();
 
   const onSubmit = (data: SignUpFormValues) => {
-    console.log("Sign up data:", data);
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    
+    if (users.some((user: any) => user.email === data.email)) {
+      toast.error('Email already exists');
+      return;
+    }
+
+    users.push(data);
+    localStorage.setItem('users', JSON.stringify(users));
+    toast.success('Account created successfully!');
+    navigate('/auth');
   };
 
   return (

@@ -5,6 +5,9 @@ import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "@/context/UserContext";
+import { toast } from "sonner";
 
 interface SignInFormValues {
   email: string;
@@ -14,9 +17,22 @@ interface SignInFormValues {
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<SignInFormValues>();
+  const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const onSubmit = (data: SignInFormValues) => {
-    console.log("Sign in data:", data);
+    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = storedUsers.find((u: any) => u.email === data.email && u.password === data.password);
+    
+    if (user) {
+      const { password, ...userWithoutPassword } = user;
+      setUser(userWithoutPassword);
+      localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+      toast.success('Successfully signed in!');
+      navigate('/');
+    } else {
+      toast.error('Invalid email or password');
+    }
   };
 
   return (

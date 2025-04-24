@@ -1,16 +1,17 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
+import { useUser } from "@/context/UserContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { theme, setTheme } = useTheme();
+  const { user, logout } = useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +31,7 @@ const Navbar = () => {
     { path: "/about", label: "About Us" },
     { path: "/features", label: "Features" },
     { path: "/contact", label: "Contact Us" },
-    { path: "/auth", label: "Sign In" },
+    ...(user ? [] : [{ path: "/auth", label: "Sign In" }]),
   ];
 
   const toggleTheme = () => {
@@ -66,6 +67,21 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
+          {user && (
+            <>
+              <span className="text-sm font-medium text-primary">
+                Welcome, {user.name}
+              </span>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={logout}
+                className="text-muted-foreground hover:text-primary"
+              >
+                <LogOut size={18} />
+              </Button>
+            </>
+          )}
           <Button
             variant="ghost"
             size="icon"
@@ -78,15 +94,16 @@ const Navbar = () => {
 
         {/* Mobile Navigation Toggle */}
         <div className="md:hidden flex items-center">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="mr-2"
-          >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </Button>
+          {user && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={logout}
+              className="mr-2 text-muted-foreground hover:text-primary"
+            >
+              <LogOut size={18} />
+            </Button>
+          )}
           <Button
             variant="ghost"
             size="icon"
@@ -108,6 +125,11 @@ const Navbar = () => {
           className="md:hidden bg-white dark:bg-gray-900 mt-3 rounded-lg shadow-lg overflow-hidden"
         >
           <div className="flex flex-col py-4">
+            {user && (
+              <span className="px-6 py-3 text-sm font-medium text-primary">
+                Welcome, {user.name}
+              </span>
+            )}
             {navLinks.map((link) => (
               <Link
                 key={link.path}

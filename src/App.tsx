@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { UserProvider } from "@/context/UserContext";
 import Layout from "@/components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -22,15 +23,17 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout><Home /></Layout>} />
-            <Route path="/about" element={<Layout><About /></Layout>} />
-            <Route path="/features" element={<Layout><Features /></Layout>} />
-            <Route path="/doc-chat" element={<Layout><DocChat /></Layout>} />
-            <Route path="/contact" element={<Layout><Contact /></Layout>} />
-            <Route path="/auth" element={<Layout><Auth /></Layout>} />
-            <Route path="*" element={<Layout><NotFound /></Layout>} />
-          </Routes>
+          <UserProvider>
+            <Routes>
+              <Route path="/" element={<Layout><Home /></Layout>} />
+              <Route path="/about" element={<Layout><About /></Layout>} />
+              <Route path="/features" element={<Layout><Features /></Layout>} />
+              <Route path="/doc-chat" element={<Layout><DocChat /></Layout>} />
+              <Route path="/contact" element={<Layout><Contact /></Layout>} />
+              <Route path="/auth" element={<Layout><Auth /></Layout>} />
+              <Route path="*" element={<Layout><NotFound /></Layout>} />
+            </Routes>
+          </UserProvider>
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
