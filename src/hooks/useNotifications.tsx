@@ -6,10 +6,6 @@ import { createPortal } from 'react-dom';
 export const useNotifications = () => {
   const [permission, setPermission] = useState<NotificationPermission>('default');
 
-  /* ──────────────────────────────────────────────────────────
-     ⬇  1.  Browser‑level permission helpers
-  ─────────────────────────────────────────────────────────── */
-
   useEffect(() => {
     if ('Notification' in window) {
       setPermission(Notification.permission);
@@ -54,10 +50,6 @@ export const useNotifications = () => {
     return permission === 'granted';
   };
 
-  /* ──────────────────────────────────────────────────────────
-     ⬇  2.  Prompt toast (center‑screen, unclipped)
-  ─────────────────────────────────────────────────────────── */
-
   const showPromptNotification = (
     title: string,
     message: string,
@@ -69,13 +61,11 @@ export const useNotifications = () => {
     toast.custom(
       (id) =>
         createPortal(
-          /* Full‑screen backdrop that centers its child */
           <div className="pointer-events-none fixed inset-0 flex items-center justify-center z-[9999]">
             <div
               className="pointer-events-auto bg-background rounded-lg shadow-lg max-w-md w-full mx-4 border border-border animate-in fade-in zoom-in-95 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* ── Header ───────────────────────────── */}
               <div className="bg-primary p-4">
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-primary-foreground flex items-center gap-2">
@@ -91,7 +81,6 @@ export const useNotifications = () => {
                 </div>
               </div>
 
-              {/* ── Body ─────────────────────────────── */}
               <div className="p-6">
                 <p className="text-muted-foreground text-base mb-6">{message}</p>
 
@@ -123,18 +112,16 @@ export const useNotifications = () => {
               </div>
             </div>
           </div>,
-          document.body // ⬅ portal target
+          document.body
         ),
       {
         duration: Infinity,
         important: true,
-        position: 'fixed', // Sonner still uses a fixed wrapper but we manage centering ourselves
+        position: "top-center",
         className: 'p-0 bg-transparent border-none shadow-none',
       }
     );
   };
-
-  /* ────────────────────────────────────────────────────────── */
 
   return {
     permission,

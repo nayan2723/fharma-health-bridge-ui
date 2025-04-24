@@ -1,8 +1,13 @@
+
   import { useState } from "react";
   import { motion } from "framer-motion";
   import { FileSearch, Brain, MessageCircle } from "lucide-react";
   import { Button } from "@/components/ui/button";
 
+  interface FeaturePointProps {
+    icon: React.ReactNode;
+    text: string;
+  }
 
   const FeaturePoint = ({ icon, text }: FeaturePointProps) => {
       return (
