@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 type Theme = "dark" | "light" | "system";
 
@@ -36,8 +36,8 @@ export function ThemeProvider({
     }
   );
 
-  // Only run this effect on client-side
-  useState(() => {
+  // Fix: Changed from useState to useEffect for applying theme changes
+  useEffect(() => {
     if (typeof window === "undefined") return;
     
     const root = window.document.documentElement;
@@ -55,7 +55,7 @@ export function ThemeProvider({
     }
 
     root.classList.add(theme);
-  });
+  }, [theme]); // Added dependency array to properly track theme changes
 
   const value = {
     theme,
