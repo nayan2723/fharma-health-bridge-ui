@@ -72,7 +72,7 @@ const About = () => {
             >
               <div className="rounded-3xl overflow-hidden shadow-lg">
                 <img 
-                  src="injection-at-community-clinic.jpg" 
+                  src="https://i.ibb.co/ycSm7tnV/injection-at-community-clinic.jpg" 
                   alt="Rural Healthcare" 
                   className="w-full h-auto"
                 />
