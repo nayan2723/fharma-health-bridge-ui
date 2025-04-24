@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, Plus, Bell, CheckCircle, XCircle } from "lucide-react";
+import { Calendar as CalendarIcon, Plus, Bell, CheckCircle, XCircle, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { motion } from "framer-motion";
 import {
   Dialog,
   DialogContent,
@@ -181,10 +182,16 @@ const MedicineScheduler = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="w-full max-w-4xl mx-auto"
+    >
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full mb-4">
             <Plus size={16} className="mr-2" />
             Add New Medication
           </Button>
@@ -294,61 +301,80 @@ const MedicineScheduler = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Test button */}
-      <Button onClick={testNotification} variant="outline" className="w-full mt-3 bg-primary/5 border-primary/20">
+      <Button onClick={testNotification} variant="outline" className="w-full mb-4 bg-primary/5 border-primary/20">
         <Bell size={16} className="mr-2" />
         Test Notification
       </Button>
 
       <div className="space-y-4 mt-6">
-        {medications.map((med) => (
-          <div key={med.id} className="bg-muted/50 rounded-xl p-4 border border-border">
-            <div className="flex justify-between items-start">
-              <div>
-                <h4 className="font-medium">{med.name}</h4>
-                <p className="text-sm text-muted-foreground">{med.dosage}</p>
-              </div>
-              <div className="flex items-center gap-2">
-                {med.status && (
-                  <div className={cn(
-                    "text-xs px-2 py-1 rounded-full flex items-center gap-1",
-                    med.status === 'taken' 
-                      ? "bg-primary/10 text-primary" 
-                      : "bg-destructive/10 text-destructive"
-                  )}>
-                    {med.status === 'taken' ? (
-                      <>
-                        <CheckCircle className="w-3 h-3" />
-                        Taken
-                      </>
-                    ) : (
-                      <>
-                        <XCircle className="w-3 h-3" />
-                        Not Taken
-                      </>
-                    )}
-                  </div>
-                )}
-                <div className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
-                  {med.timeOfDay}
-                </div>
-              </div>
-            </div>
-            <div className="mt-3 flex items-center gap-2">
-              <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                <div
-                  className="bg-primary h-full transition-all duration-300"
-                  style={{ width: `${calculateProgress(med)}%` }}
-                />
-              </div>
-              <span className="text-xs text-muted-foreground">
-                {med.daysCompleted}/{med.duration} days
-              </span>
-            </div>
+        <div className="bg-card rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-4">
+            <MessageSquare className="text-primary" size={20} />
+            <h3 className="font-medium">Medicine Schedule</h3>
           </div>
-        ))}
+          <div className="space-y-4">
+            {medications.map((med) => (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                key={med.id}
+                className={cn(
+                  "p-4 rounded-xl transition-all",
+                  med.status === 'taken' 
+                    ? "bg-primary/5 border border-primary/20" 
+                    : "bg-muted/50 border border-border"
+                )}
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-medium">{med.name}</h4>
+                    <p className="text-sm text-muted-foreground">{med.dosage}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {med.status && (
+                      <div className={cn(
+                        "text-xs px-2 py-1 rounded-full flex items-center gap-1",
+                        med.status === 'taken' 
+                          ? "bg-primary/10 text-primary" 
+                          : "bg-destructive/10 text-destructive"
+                      )}>
+                        {med.status === 'taken' ? (
+                          <>
+                            <CheckCircle className="w-3 h-3" />
+                            Taken
+                          </>
+                        ) : (
+                          <>
+                            <XCircle className="w-3 h-3" />
+                            Not Taken
+                          </>
+                        )}
+                      </div>
+                    )}
+                    <div className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
+                      {med.timeOfDay}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center gap-2">
+                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${calculateProgress(med)}%` }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="bg-primary h-full"
+                    />
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    {med.daysCompleted}/{med.duration} days
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

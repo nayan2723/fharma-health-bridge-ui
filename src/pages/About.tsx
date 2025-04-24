@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
+import ImageZoom from "@/components/ImageZoom";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -81,11 +82,11 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <div className="glass-card rounded-3xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                <img 
+              <div className="glass-card rounded-3xl overflow-hidden shadow-lg">
+                <ImageZoom 
                   src="https://i.ibb.co/ycSm7tnV/injection-at-community-clinic.jpg" 
                   alt="Rural Healthcare" 
-                  className="w-full h-auto transform transition-transform duration-500 hover:scale-110"
+                  className="w-full h-auto transform transition-transform duration-500 hover:scale-105"
                 />
               </div>
             </motion.div>
@@ -128,8 +129,8 @@ const About = () => {
               viewport={{ once: true }}
               className="md:w-1/2"
             >
-              <div className="glass-card rounded-3xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                <img 
+              <div className="glass-card rounded-3xl overflow-hidden shadow-lg">
+                <ImageZoom 
                   src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" 
                   alt="Healthcare Technology" 
                   className="w-full h-auto transform transition-transform duration-500 hover:scale-110"
@@ -243,13 +244,13 @@ const TeamMember = ({ name, role, image }: TeamMemberProps) => {
         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
       }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="glass-card rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+      className="glass-card rounded-2xl overflow-hidden"
     >
       <div className="aspect-[4/3] overflow-hidden">
-        <img 
+        <ImageZoom 
           src={image} 
-          alt={name} 
-          className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110" 
+          alt={name}
+          className="w-full h-full object-cover" 
         />
       </div>
       <div className="p-6">
