@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from '@/components/ui/sonner';
 import { Check, X, Bell, BellOff } from 'lucide-react';
 import { createPortal } from 'react-dom';
+import { playNotificationSound } from '@/utils/sound';
 
 export const useNotifications = () => {
   const [permission, setPermission] = useState<NotificationPermission>('default');
@@ -57,6 +58,9 @@ export const useNotifications = () => {
     onMissed: () => void
   ) => {
     console.log('Showing prompt notification:', title, message);
+    
+    // Play notification sound
+    playNotificationSound();
 
     toast.custom(
       (id) =>
