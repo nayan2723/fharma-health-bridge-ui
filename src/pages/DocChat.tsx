@@ -41,7 +41,7 @@ export default function DocChat() {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
     // Add user message to the chat history
-    const userMessage = { text: input, sender: "user" };
+    const userMessage: Message = { text: input, sender: "user" };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
 
@@ -56,7 +56,7 @@ export default function DocChat() {
       const botResponse = await fetchGeminiResponse(input, updatedMessages, apiKey);
 
       // Add bot response to the chat history
-      const botMessage = { text: botResponse, sender: "bot" };
+      const botMessage: Message = { text: botResponse, sender: "bot" };
       setMessages([...updatedMessages, botMessage]);
     } catch (error) {
       toast.error("Failed to get a response. Please try again later.");
