@@ -10,6 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { toast } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import PageTransition from "@/components/PageTransition";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Message {
   text: string;
@@ -17,6 +18,7 @@ interface Message {
 }
 
 export default function DocChat() {
+  const { t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -90,7 +92,7 @@ export default function DocChat() {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <div className="h-3 w-3 rounded-full bg-primary animate-pulse" />
-                <h1 className="text-2xl font-bold">Doc Chat</h1>
+                <h1 className="text-2xl font-bold">{t("docchat.title")}</h1>
               </div>
               <div className="text-sm text-muted-foreground">
                 AI Assistant
@@ -106,8 +108,8 @@ export default function DocChat() {
                     animate={{ opacity: 1 }}
                     className="h-full flex flex-col items-center justify-center text-center gap-4 text-muted-foreground"
                   >
-                    <p className="text-lg font-medium">Welcome to Doc Chat</p>
-                    <p>Ask any health-related questions to get started.</p>
+                    <p className="text-lg font-medium">{t("docchat.welcome")}</p>
+                    <p>{t("docchat.prompt")}</p>
                   </motion.div>
                 ) : (
                   <div className="space-y-5">
@@ -144,11 +146,11 @@ export default function DocChat() {
                                     onClick={() => handleCopy(msg.text)}
                                   >
                                     <Clipboard className="h-3.5 w-3.5 mr-1" />
-                                    <span className="text-xs">Copy</span>
+                                    <span className="text-xs">{t("docchat.copy")}</span>
                                   </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                  <p>Copy to clipboard</p>
+                                  <p>{t("docchat.copy")}</p>
                                 </TooltipContent>
                               </Tooltip>
                             </div>
@@ -167,7 +169,7 @@ export default function DocChat() {
                         <div className="bg-muted rounded-xl rounded-tl-none p-4 max-w-[80%]">
                           <div className="flex items-center gap-2">
                             <Loader className="h-4 w-4 animate-spin" />
-                            <span className="text-sm">Thinking...</span>
+                            <span className="text-sm">{t("docchat.thinking")}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -183,7 +185,7 @@ export default function DocChat() {
               <textarea
                 ref={inputRef}
                 className="w-full bg-muted/50 min-h-[44px] max-h-[200px] rounded-xl px-4 py-3 pr-12 resize-none focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Type your message..."
+                placeholder={t("docchat.placeholder")}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -201,7 +203,7 @@ export default function DocChat() {
             </div>
 
             <div className="mt-3 text-xs text-center text-muted-foreground">
-              <p>Powered by Google Gemini AI</p>
+              <p>{t("docchat.poweredby")}</p>
             </div>
           </motion.div>
         </div>

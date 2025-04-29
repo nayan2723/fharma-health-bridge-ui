@@ -1,10 +1,13 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon, LogOut } from "lucide-react";
+import { Menu, X, Sun, Moon, LogOut, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 import { useUser } from "@/context/UserContext";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +15,7 @@ const Navbar = () => {
   const location = useLocation();
   const { theme, setTheme } = useTheme();
   const { user, logout } = useUser();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,11 +31,11 @@ const Navbar = () => {
   }, [location]);
 
   const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About Us" },
-    { path: "/features", label: "Features" },
-    { path: "/contact", label: "Contact Us" },
-    ...(user ? [] : [{ path: "/auth", label: "Sign In" }]),
+    { path: "/", label: t("nav.home") },
+    { path: "/about", label: t("nav.about") },
+    { path: "/features", label: t("nav.features") },
+    { path: "/contact", label: t("nav.contact") },
+    ...(user ? [] : [{ path: "/auth", label: t("nav.signin") }]),
   ];
 
   const toggleTheme = () => {
@@ -55,7 +59,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-3">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -70,7 +74,7 @@ const Navbar = () => {
           {user && (
             <>
               <span className="text-sm font-medium text-primary">
-                Welcome, {user.name}
+                {t("nav.welcome")}, {user.name}
               </span>
               <Button
                 variant="ghost"
@@ -82,6 +86,7 @@ const Navbar = () => {
               </Button>
             </>
           )}
+          <LanguageToggle />
           <Button
             variant="ghost"
             size="icon"
@@ -104,6 +109,16 @@ const Navbar = () => {
               <LogOut size={18} />
             </Button>
           )}
+          <LanguageToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="mr-2"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </Button>
           <Button
             variant="ghost"
             size="icon"
@@ -127,7 +142,7 @@ const Navbar = () => {
           <div className="flex flex-col py-4">
             {user && (
               <span className="px-6 py-3 text-sm font-medium text-primary">
-                Welcome, {user.name}
+                {t("nav.welcome")}, {user.name}
               </span>
             )}
             {navLinks.map((link) => (

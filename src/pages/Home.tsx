@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Pill, MessageCircle, Calendar, FileSearch } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/LanguageContext";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -24,6 +25,8 @@ const staggerContainer = {
 };
 
 const Home = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="flex flex-col gap-20">
       {/* Hero Section */}
@@ -39,17 +42,17 @@ const Home = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 <span className="text-gradient">Fharma</span>
                 <br />
-                <span className="text-foreground">Healthcare Reimagined</span>
+                <span className="text-foreground">{t("home.title")}</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl">
-                Connecting Rural India to Urban Healthcare through AI-powered technologies.
+                {t("home.subtitle")}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild size="lg" className="rounded-full">
-                  <Link to="/features">Explore Features <ArrowRight className="ml-2" size={18} /></Link>
+                  <Link to="/features">{t("home.explore")} <ArrowRight className="ml-2" size={18} /></Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-full">
-                  <Link to="/doc-chat">Try Medicine Recommender</Link>
+                  <Link to="/doc-chat">{t("home.try")}</Link>
                 </Button>
               </div>
             </motion.div>
@@ -84,9 +87,9 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Key Features</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("home.features")}</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Bridging the gap between rural and urban healthcare with innovative technology solutions.
+              {t("home.features.subtitle")}
             </p>
           </motion.div>
 
@@ -99,29 +102,29 @@ const Home = () => {
           >
             <FeatureCard 
               icon={<Pill size={32} />}
-              title="Medicine Recommender"
-              description="AI-powered medicine recommendations based on symptoms and history."
+              title={t("feature.medicine.title")}
+              description={t("feature.medicine.desc")}
               link="/features#medicine-recommender"
             />
             
             <FeatureCard 
               icon={<MessageCircle size={32} />}
-              title="Doc Chat"
-              description="Connect with AI doctors for quick consultations and health advice."
+              title={t("feature.chat.title")}
+              description={t("feature.chat.desc")}
               link="/features#doc-chat"
             />
             
             <FeatureCard 
               icon={<Calendar size={32} />}
-              title="Medicine Scheduler"
-              description="Never miss a dose with our smart medication scheduling system."
+              title={t("feature.scheduler.title")}
+              description={t("feature.scheduler.desc")}
               link="/features#medicine-scheduler"
             />
             
             <FeatureCard 
               icon={<FileSearch size={32} />}
-              title="Rare Disease Info"
-              description="Comprehensive information on rare diseases for better understanding."
+              title={t("feature.disease.title")}
+              description={t("feature.disease.desc")}
               link="/features#rare-diseases"
             />
           </motion.div>
@@ -138,12 +141,12 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Experience Better Healthcare?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t("home.cta.title")}</h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of users who are bridging the healthcare gap with Fharma's innovative platform.
+              {t("home.cta.subtitle")}
             </p>
             <Button asChild size="lg" className="rounded-full">
-              <Link to="/features">Get Started Now <ArrowRight className="ml-2" size={18} /></Link>
+              <Link to="/features">{t("home.cta.button")} <ArrowRight className="ml-2" size={18} /></Link>
             </Button>
           </motion.div>
         </div>
@@ -160,6 +163,8 @@ interface FeatureCardProps {
 }
 
 const FeatureCard = ({ icon, title, description, link }: FeatureCardProps) => {
+  const { t } = useLanguage();
+  
   return (
     <motion.div
       variants={fadeInUp}
@@ -171,7 +176,7 @@ const FeatureCard = ({ icon, title, description, link }: FeatureCardProps) => {
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
       <p className="text-muted-foreground mb-4">{description}</p>
       <Link to={link} className="inline-flex items-center text-primary">
-        Learn more <ArrowRight className="ml-1" size={16} />
+        {t("feature.learn")} <ArrowRight className="ml-1" size={16} />
       </Link>
     </motion.div>
   );
