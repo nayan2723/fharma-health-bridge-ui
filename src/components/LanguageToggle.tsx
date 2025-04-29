@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Languages } from "lucide-react";
+import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 import {
@@ -17,7 +17,7 @@ const LanguageToggle = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="Toggle language">
-          <Languages size={18} />
+          <Globe size={18} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -32,6 +32,12 @@ const LanguageToggle = () => {
           className={language === "hindi" ? "bg-muted" : ""}
         >
           हिंदी (Hindi)
+        </DropdownMenuItem>
+        <DropdownMenuItem 
+          onClick={() => setLanguage("telugu")}
+          className={language === "telugu" ? "bg-muted" : ""}
+        >
+          తెలుగు (Telugu)
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

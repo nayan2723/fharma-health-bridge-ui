@@ -1,7 +1,7 @@
 
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
-type Language = "english" | "hindi";
+type Language = "english" | "hindi" | "telugu";
 
 interface LanguageContextType {
   language: Language;
@@ -91,6 +91,46 @@ export const translations = {
     "docchat.copy": "कॉपी करें",
     "docchat.placeholder": "अपना संदेश टाइप करें...",
     "docchat.poweredby": "Google Gemini AI द्वारा संचालित",
+  },
+  telugu: {
+    // Navigation
+    "nav.home": "హోమ్",
+    "nav.about": "మా గురించి",
+    "nav.features": "ఫీచర్లు",
+    "nav.contact": "సంప్రదించండి",
+    "nav.signin": "సైన్ ఇన్",
+    "nav.welcome": "స్వాగతం",
+    
+    // Home page
+    "home.title": "ఆరోగ్య సంరక్షణ పునःకల్పన",
+    "home.subtitle": "AI-ఆధారిత సాంకేతికతల ద్వారా గ్రామీణ భారతదేశాన్ని పట్టణ ఆరోగ్య సంరక్షణతో అనుసంధానించడం.",
+    "home.explore": "ఫీచర్లను అన్వేషించండి",
+    "home.try": "మందుల సిఫార్సు చేయడాన్ని ప్రయత్నించండి",
+    "home.features": "మా ముఖ్య ఫీచర్లు",
+    "home.features.subtitle": "వినూత్న సాంకేతిక పరిష్కారాలతో గ్రామీణ మరియు పట్టణ ఆరోగ్య సంరక్షణ మధ్య అంతరాన్ని పూడ్చడం.",
+    "home.cta.title": "మెరుగైన ఆరోగ్య సంరక్షణను అనుభవించడానికి సిద్ధంగా ఉన్నారా?",
+    "home.cta.subtitle": "ఫార్మా యొక్క వినూత్న ప్లాట్‌ఫారమ్‌తో ఆరోగ్య సంరక్షణ అంతరాన్ని అధిగమిస్తున్న వేలాది వినియోగదారులతో చేరండి.",
+    "home.cta.button": "ఇప్పుడే ప్రారంభించండి",
+    
+    // Feature cards
+    "feature.medicine.title": "మందుల సిఫార్సుదారు",
+    "feature.medicine.desc": "లక్షణాలు మరియు చరిత్ర ఆధారంగా AI-ఆధారిత మందుల సిఫార్సులు.",
+    "feature.chat.title": "డాక్ చాట్",
+    "feature.chat.desc": "త్వరిత సంప్రదింపులు మరియు ఆరోగ్య సలహాల కోసం AI డాక్టర్లతో అనుసంధానించండి.",
+    "feature.scheduler.title": "మందుల షెడ్యూలర్",
+    "feature.scheduler.desc": "మా స్మార్ట్ మెడికేషన్ షెడ్యూలింగ్ సిస్టమ్‌తో మందు మోతాదును మిస్ కాకుండా ఉండండి.",
+    "feature.disease.title": "అరుదైన వ్యాధి సమాచారం",
+    "feature.disease.desc": "మెరుగైన అవగాహన కోసం అరుదైన వ్యాధుల గురించి సమగ్ర సమాచారం.",
+    "feature.learn": "మరింత తెలుసుకోండి",
+    
+    // DocChat
+    "docchat.title": "డాక్ చాట్",
+    "docchat.welcome": "డాక్ చాట్‌కి స్వాగతం",
+    "docchat.prompt": "ప్రారంభించడానికి ఏవైనా ఆరోగ్య-సంబంధిత ప్రశ్నలను అడగండి.",
+    "docchat.thinking": "ఆలోచిస్తున్నాను...",
+    "docchat.copy": "కాపీ చేయండి",
+    "docchat.placeholder": "మీ సందేశాన్ని టైప్ చేయండి...",
+    "docchat.poweredby": "Google Gemini AI ద్వారా ఆధారితం",
   }
 };
 
