@@ -51,6 +51,30 @@ export const translations = {
     "docchat.copy": "Copy",
     "docchat.placeholder": "Type your message...",
     "docchat.poweredby": "Powered by Google Gemini AI",
+    
+    // Footer
+    "footer.description": "Connecting Rural India to Urban Healthcare through AI-powered solutions.",
+    "footer.quicklinks": "Quick Links",
+    "footer.contact": "Contact Us",
+    "footer.address": "Bennett University, Greater Noida, India",
+    "footer.phone": "+91 1234567890",
+    "footer.email": "info@fharma.in",
+    "footer.rights": "All rights reserved.",
+    
+    // Not Found Page
+    "notfound.title": "404",
+    "notfound.heading": "Page Not Found",
+    "notfound.description": "The page you are looking for doesn't exist or has been moved.",
+    "notfound.back": "Go Back",
+    "notfound.home": "Return Home",
+    
+    // Auth Page
+    "auth.signin.title": "Welcome back",
+    "auth.signin.description": "Enter your credentials to sign in",
+    "auth.signup.title": "Create an account",
+    "auth.signup.description": "Enter your information to create an account",
+    "auth.switchToSignup": "Don't have an account? Sign up",
+    "auth.switchToSignin": "Already have an account? Sign in",
   },
   hindi: {
     // Navigation
@@ -91,6 +115,30 @@ export const translations = {
     "docchat.copy": "कॉपी करें",
     "docchat.placeholder": "अपना संदेश टाइप करें...",
     "docchat.poweredby": "Google Gemini AI द्वारा संचालित",
+    
+    // Footer
+    "footer.description": "AI-संचालित समाधानों के माध्यम से ग्रामीण भारत को शहरी स्वास्थ्य सेवा से जोड़ना।",
+    "footer.quicklinks": "त्वरित लिंक",
+    "footer.contact": "संपर्क करें",
+    "footer.address": "बेनेट विश्वविद्यालय, ग्रेटर नोएडा, भारत",
+    "footer.phone": "+91 1234567890",
+    "footer.email": "info@fharma.in",
+    "footer.rights": "सर्वाधिकार सुरक्षित।",
+    
+    // Not Found Page
+    "notfound.title": "404",
+    "notfound.heading": "पृष्ठ नहीं मिला",
+    "notfound.description": "आप जिस पृष्ठ की तलाश कर रहे हैं वह मौजूद नहीं है या स्थानांतरित कर दिया गया है।",
+    "notfound.back": "वापस जाएं",
+    "notfound.home": "होम पर लौटें",
+    
+    // Auth Page
+    "auth.signin.title": "वापसी पर स्वागत है",
+    "auth.signin.description": "साइन इन करने के लिए अपने क्रेडेंशियल्स दर्ज करें",
+    "auth.signup.title": "खाता बनाएं",
+    "auth.signup.description": "खाता बनाने के लिए अपनी जानकारी दर्ज करें",
+    "auth.switchToSignup": "खाता नहीं है? साइन अप करें",
+    "auth.switchToSignin": "पहले से खाता है? साइन इन करें",
   },
   telugu: {
     // Navigation
@@ -102,7 +150,7 @@ export const translations = {
     "nav.welcome": "స్వాగతం",
     
     // Home page
-    "home.title": "ఆరోగ్య సంరక్షణ పునःకల్పన",
+    "home.title": "ఆరోగ్య సంరక్షణ పునఃకల్పన",
     "home.subtitle": "AI-ఆధారిత సాంకేతికతల ద్వారా గ్రామీణ భారతదేశాన్ని పట్టణ ఆరోగ్య సంరక్షణతో అనుసంధానించడం.",
     "home.explore": "ఫీచర్లను అన్వేషించండి",
     "home.try": "మందుల సిఫార్సు చేయడాన్ని ప్రయత్నించండి",
@@ -131,6 +179,30 @@ export const translations = {
     "docchat.copy": "కాపీ చేయండి",
     "docchat.placeholder": "మీ సందేశాన్ని టైప్ చేయండి...",
     "docchat.poweredby": "Google Gemini AI ద్వారా ఆధారితం",
+    
+    // Footer
+    "footer.description": "AI-ఆధారిత పరిష్కారాల ద్వారా గ్రామీణ భారతదేశాన్ని పట్టణ ఆరోగ్య సంరక్షణతో అనుసంధానించడం.",
+    "footer.quicklinks": "త్వరిత లింకులు",
+    "footer.contact": "సంప్రదించండి",
+    "footer.address": "బెన్నెట్ విశ్వవిద్యాలయం, గ్రేటర్ నోయిడా, భారతదేశం",
+    "footer.phone": "+91 1234567890",
+    "footer.email": "info@fharma.in",
+    "footer.rights": "సర్వహక్కులు రిజర్వ్ చేయబడ్డాయి.",
+    
+    // Not Found Page
+    "notfound.title": "404",
+    "notfound.heading": "పేజీ కనుగొనబడలేదు",
+    "notfound.description": "మీరు వెతుకుతున్న పేజీ లేదా స్థానం మార్చబడింది.",
+    "notfound.back": "వెనక్కి వెళ్ళండి",
+    "notfound.home": "హోమ్‌కి తిరిగి వెళ్ళండి",
+    
+    // Auth Page
+    "auth.signin.title": "తిరిగి స్వాగతం",
+    "auth.signin.description": "సైన్ ఇన్ చేయడానికి మీ ఆధారాలను నమోదు చేయండి",
+    "auth.signup.title": "ఖాతాను సృష్టించండి",
+    "auth.signup.description": "ఖాతాను సృష్టించడానికి మీ సమాచారాన్ని నమోదు చేయండి",
+    "auth.switchToSignup": "ఖాతా లేదా? సైన్ అప్ చేయండి",
+    "auth.switchToSignin": "ఇప్పటికే ఖాతా ఉందా? సైన్ ఇన్ చేయండి",
   }
 };
 
