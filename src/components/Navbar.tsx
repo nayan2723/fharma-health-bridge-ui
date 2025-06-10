@@ -14,7 +14,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { theme, setTheme } = useTheme();
-  const { user, logout } = useUser();
+  const { user, profile, loading, logout } = useUser();
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -41,6 +41,27 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-3 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
+        <div className="container mx-auto flex justify-between items-center">
+          <Link to="/" className="flex items-center space-x-2">
+            <span className="font-bold text-2xl text-gradient">Fharma</span>
+          </Link>
+          <div className="animate-pulse w-32 h-8 bg-gray-200 dark:bg-gray-700 rounded"></div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <motion.nav
@@ -74,12 +95,12 @@ const Navbar = () => {
           {user && (
             <>
               <span className="text-sm font-medium text-primary">
-                {t("nav.welcome")}, {user.name}
+                {t("nav.welcome")}, {profile?.full_name || user.email}
               </span>
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={logout}
+                onClick={handleLogout}
                 className="text-muted-foreground hover:text-primary"
               >
                 <LogOut size={18} />
@@ -103,7 +124,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={logout}
+              onClick={handleLogout}
               className="mr-2 text-muted-foreground hover:text-primary"
             >
               <LogOut size={18} />
@@ -142,7 +163,7 @@ const Navbar = () => {
           <div className="flex flex-col py-4">
             {user && (
               <span className="px-6 py-3 text-sm font-medium text-primary">
-                {t("nav.welcome")}, {user.name}
+                {t("nav.welcome")}, {profile?.full_name || user.email}
               </span>
             )}
             {navLinks.map((link) => (
